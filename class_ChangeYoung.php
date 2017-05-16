@@ -95,10 +95,15 @@
                 $result[] = "The amount paid was $" . round($this->paid, 2);
                 $result[] = "The change due is $" . round($this->change, 2);
                 $result[] = "Return the following denomination as change:";
+                // loop through the currency array and use the value to calculate the change that is due
                 foreach($this->currency as $key => $value) {
+                    // Check if change is greater than or equal to current currency
                     if($this->change >= $value) {
+                        // Divide the current change amount by the value of the current currency
                         $amount = floor($this->change / $value);
+                        // add the amount of currency and what it is to the result array
                         $result[] = "$amount " . $key;
+                        // update the amount of change left
                         $this->change -= $value * $amount;
                     } // end if
                 } // end foreach
